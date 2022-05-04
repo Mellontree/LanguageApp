@@ -5,12 +5,29 @@
  */
 package languageapp;
 
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.util.logging.Logger;
+import java.sql.PreparedStatement;
+import java.util.Date;
+import java.sql.Timestamp;
+import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.sql.SQLException;
+import java.util.regex.Pattern;
+
+
+
 /**
  *
  * @author kristi
  */
 public class SignUp extends javax.swing.JFrame {
-
+    
+    Date date = new Date();
+    private boolean uniqueEmail;
+    
     /**
      * Creates new form SignUp
      */
@@ -70,7 +87,7 @@ public class SignUp extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 102, 255));
-        jLabel6.setText("Name");
+        jLabel6.setText("User Name");
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 102, 255));
@@ -93,6 +110,11 @@ public class SignUp extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Continue");
         jButton1.setBorderPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,6 +202,107 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         try{
+            Connection connection = connectDB.getConnection(); //?
+            String salt = AppSecurity.generateSlt(25);
+            String uType = "";
+            String uName = "";
+            String uPassword = "";
+            String uEmail = "";
+    
+            uName = jTextField1.getText().trim();
+            uPassword = String.valueOf(jPasswordField1.getPassword());
+            uEmail = jTextField2.getText().trim();
+ 
+            Matcher emailMatcPattern = Pattern.compile("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", Pattern.CASE_INSENSITIVE).matcher(uEmail);
+            Matcher passwordMatchPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$", Pattern.CASE_INSENSITIVE).matcher(uPassword);
+            verification();
+            
+            if(uName.equals("") || uPassword.equals("") || uEmail.equals("")){   
+                JOptionPane.showMessageDialog(this, "Please fill up all empty fields");
+            }
+
+            else if(!emailMatcPattern.find()){              
+                JOptionPane.showMessageDialog(this, "Please enter valid email");
+                jTextField2.setText("");
+            }
+            
+            else if(!passwordMatchPattern.find()){                 
+                JOptionPane.showMessageDialog(this, " Please enter password that is at \n least 8 charachters long, contains \n at least one digit, upper and lower \n case charachter, special charachter ");
+                jTextField2.setText("");
+             }
+            
+            else if(uniqueEmail){
+                JOptionPane.showMessageDialog(this, "This email has been registered. \n Enter another email");
+                jTextField2.setText("");
+                uniqueEmail = false;
+            }
+
+            else{
+                
+                if(SelectUserType.getAdministrator().equals("Administrator")){
+                    uType = "Administrator";
+                }
+                
+                if(SelectUserType.getStudent().equals("Student")){
+                    uType = "Student";                 
+                }
+                
+                if(SelectUserType.getTeacher().equals("Teacher")){
+                    uType = "Teacher";
+                }
+                
+                String passwordSecuredAndProtected = AppSecurity.createPasswordSecuredAndProtected(uPassword, salt);
+                String insertQuary = "insert into User(userType, userName, userPassword, userEmail, createdAt)"
+                        + "VALUES (?,?,?,?,?)";
+ 
+                PreparedStatement preparedStatement = connection.prepareStatement(insertQuary);
+                preparedStatement.setString(1, uType);
+                preparedStatement.setString(2, uName);
+                preparedStatement.setString(3, passwordSecuredAndProtected);
+                preparedStatement.setString(4, uEmail );
+                preparedStatement.setString(5, date.toString());
+                preparedStatement.executeUpdate();
+                
+                JOptionPane.showMessageDialog(this, "Successfull registration!");
+                connection.close();
+                 
+                SignIn signIn = new SignIn();
+                signIn.show();
+        
+                dispose();
+             }
+        }
+            catch(Exception e){
+                System.out.println(e.getMessage());
+                System.out.println("Connection Not closed");
+             }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    public void verification(){
+        try{
+            Connection connection = connectDB.getConnection();
+            String selectQuary = "Select * from User where userEmail=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(selectQuary);
+            preparedStatement.setString(1, jTextField2.getText());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                uniqueEmail = true;
+            }
+            
+            else{
+                uniqueEmail = false;
+            }
+            connection.close();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    
     /**
      * @param args the command line arguments
      */
