@@ -11,7 +11,9 @@ package languageapp;
 public class UserProfile extends javax.swing.JPanel {
     
     // Attributes
-    
+    String userName = null;
+    String userID = null;
+    String userEmail = null;
     
     
     
@@ -40,6 +42,8 @@ public class UserProfile extends javax.swing.JPanel {
         jButtonActivity = new javax.swing.JButton();
         jButtonSettings = new javax.swing.JButton();
 
+        setAlignmentX(0.0F);
+        setAlignmentY(0.0F);
         setMaximumSize(new java.awt.Dimension(230, 667));
         setMinimumSize(new java.awt.Dimension(230, 667));
         setPreferredSize(new java.awt.Dimension(230, 667));
@@ -176,3 +180,5 @@ public class UserProfile extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables
 }
+
+// TEST
