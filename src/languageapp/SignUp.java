@@ -64,14 +64,11 @@ public class SignUp extends javax.swing.JFrame {
         setLocation(new java.awt.Point(50, 100));
         setMaximumSize(new java.awt.Dimension(375, 667));
         setMinimumSize(new java.awt.Dimension(375, 667));
-        setPreferredSize(new java.awt.Dimension(375, 667));
 
         jPanel1.setBackground(new java.awt.Color(238, 249, 250));
-        jPanel1.setLocation(new java.awt.Point(50, 100));
         jPanel1.setMaximumSize(new java.awt.Dimension(375, 667));
         jPanel1.setMinimumSize(new java.awt.Dimension(375, 667));
         jPanel1.setPreferredSize(new java.awt.Dimension(375, 667));
-        jPanel1.setSize(new java.awt.Dimension(375, 667));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/languageapp/logo.png"))); // NOI18N
 
@@ -127,7 +124,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 17, Short.MAX_VALUE)
+                .addGap(0, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCheckBox1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +178,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

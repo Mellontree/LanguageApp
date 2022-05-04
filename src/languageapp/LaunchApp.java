@@ -42,11 +42,9 @@ public class LaunchApp extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(375, 667));
 
         jPanel1.setBackground(new java.awt.Color(238, 249, 250));
-        jPanel1.setLocation(new java.awt.Point(50, 100));
         jPanel1.setMaximumSize(new java.awt.Dimension(375, 667));
         jPanel1.setMinimumSize(new java.awt.Dimension(375, 667));
         jPanel1.setPreferredSize(new java.awt.Dimension(375, 667));
-        jPanel1.setSize(new java.awt.Dimension(375, 667));
 
         jButton1.setBackground(new java.awt.Color(160, 178, 231));
         jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -86,7 +84,7 @@ public class LaunchApp extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(77, 77, 77)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 72, Short.MAX_VALUE)))
+                        .addGap(0, 66, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(130, 130, 130)
