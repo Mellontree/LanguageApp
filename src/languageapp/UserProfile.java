@@ -11,16 +11,42 @@ package languageapp;
 public class UserProfile extends javax.swing.JPanel {
     
     // Attributes
-    String userName = null;
-    String userID = null;
-    String userEmail = null;
+    String userName = null;     // the name of the user
+    String userID = null;       // the id of the user
+    String userEmail = null;    // the email of the user
+    int completedRP = 0;        // the number of the completed roleplays
+    int A1RP = 0;               // the number of A1 completed roleplays
+    int A2RP = 0;               // the number of A2 completed roleplays
+    int B1RP = 0;               // the number of B1 completed roleplays
+    int B2RP = 0;               // the number of B2 completed roleplays
+    int accessedVocab = 0;      // the number of times the user has accessed the vocabulary support offered
     
-    
+    // Methods
+    private void setStrings() {
+        // This method sets the values of the user attributes from sign in.
+        this.userName = null;
+        this.userID = null;
+        this.userEmail = null;
+        // Replace null with values from the DB
+    }
+    private void setIntegers() {
+        // This method sets the values of the user attributes from sign in.
+        // The below attributes must be refreshed every time the profile tab is accessed.
+        this.completedRP = 0;
+        this.A1RP = 0;
+        this.A2RP = 0;
+        this.B1RP = 0;
+        this.B2RP = 0;
+        this.accessedVocab = 0;
+        // Replace 0s with values from the DB
+    }
     
     /**
-     * Creates new form StudentProfile
+     * Creates new form User Profile
      */
     public UserProfile() {
+        setStrings();
+        setIntegers();
         initComponents();
     }
 
@@ -59,17 +85,27 @@ public class UserProfile extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jTextFieldName.setBackground(new java.awt.Color(215, 229, 240));
+        jTextFieldName.setFont(new java.awt.Font("Lucida Bright", 1, 12)); // NOI18N
         jTextFieldName.setText("name");
 
+        jTextFieldID.setBackground(new java.awt.Color(215, 229, 240));
+        jTextFieldID.setFont(new java.awt.Font("Lucida Bright", 0, 8)); // NOI18N
         jTextFieldID.setText("ID");
 
+        jTextFieldEmail.setBackground(new java.awt.Color(215, 229, 240));
+        jTextFieldEmail.setFont(new java.awt.Font("Lucida Bright", 0, 10)); // NOI18N
         jTextFieldEmail.setText("email");
+        jTextFieldEmail.setToolTipText("");
         jTextFieldEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldEmailActionPerformed(evt);
             }
         });
 
+        jButtonAnalytics.setBackground(new java.awt.Color(160, 178, 231));
+        jButtonAnalytics.setFont(new java.awt.Font("Lucida Bright", 1, 13)); // NOI18N
+        jButtonAnalytics.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAnalytics.setText("Analytics");
         jButtonAnalytics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +113,9 @@ public class UserProfile extends javax.swing.JPanel {
             }
         });
 
+        jButtonMenu.setBackground(new java.awt.Color(160, 178, 231));
+        jButtonMenu.setFont(new java.awt.Font("Lucida Bright", 1, 13)); // NOI18N
+        jButtonMenu.setForeground(new java.awt.Color(255, 255, 255));
         jButtonMenu.setText("Menu");
         jButtonMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,6 +123,9 @@ public class UserProfile extends javax.swing.JPanel {
             }
         });
 
+        jButtonActivity.setBackground(new java.awt.Color(160, 178, 231));
+        jButtonActivity.setFont(new java.awt.Font("Lucida Bright", 1, 13)); // NOI18N
+        jButtonActivity.setForeground(new java.awt.Color(255, 255, 255));
         jButtonActivity.setText("Activity");
         jButtonActivity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +133,11 @@ public class UserProfile extends javax.swing.JPanel {
             }
         });
 
+        jButtonSettings.setBackground(new java.awt.Color(160, 178, 231));
+        jButtonSettings.setFont(new java.awt.Font("Lucida Bright", 1, 13)); // NOI18N
+        jButtonSettings.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSettings.setText("Settings");
+        jButtonSettings.setToolTipText("");
         jButtonSettings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSettingsActionPerformed(evt);
@@ -103,17 +149,17 @@ public class UserProfile extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonActivity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButtonAnalytics, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jButtonMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldID, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAnalytics, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +178,7 @@ public class UserProfile extends javax.swing.JPanel {
                 .addComponent(jButtonAnalytics)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonActivity)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addComponent(jButtonSettings)
                 .addGap(79, 79, 79))
         );
@@ -159,7 +205,9 @@ public class UserProfile extends javax.swing.JPanel {
     private void jButtonActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActivityActionPerformed
         // TODO add your handling code here:
         // Closes the profile panel and redirects the user to the user activity
+        ActivityHistory activity = new ActivityHistory();
         setVisible(false);
+        
     }//GEN-LAST:event_jButtonActivityActionPerformed
 
     private void jButtonSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSettingsActionPerformed
